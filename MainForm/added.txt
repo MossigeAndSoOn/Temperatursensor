@@ -1,0 +1,5 @@
+Database class
+Mail class (+ImapX.dll)
+SMS class (+android-sdk-tools)
+
+
