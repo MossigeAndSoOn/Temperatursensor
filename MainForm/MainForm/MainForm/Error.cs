@@ -13,7 +13,7 @@ namespace MainForm
                 DateTime.Now.ToShortTimeString();
             string sql = "INSERT INTO ErrorLog (DateTimeString, ErrorMsg, Comment, Origin) VALUES ('" +
                 timestring + "','" + errorMsg + "','" + comment + "','" + origin + "')";
-            Database.passSQLstringToMDB(sql, "data");
+            Database.passSQLstringToMDB(sql);
         }
     }
 }
