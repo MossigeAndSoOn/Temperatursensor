@@ -55,26 +55,31 @@ namespace MDB_readerClass
             this.MaximizeBox = false;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //MainForm.Database.writeTableToMDB(Contacts);
-            //DataRow currentRow = new DataRow();
-            //currentRow = Contacts.Rows[dataGridView1.CurrentRow.Index];
-            MainForm.Database.updateContactsTable(Contacts);
-        }
+        //private void button1_Click(object sender, EventArgs e)
+        //{
+        //    //MainForm.Database.writeTableToMDB(Contacts);
+        //    //DataRow currentRow = new DataRow();
+        //    //currentRow = Contacts.Rows[dataGridView1.CurrentRow.Index];
+        //    MainForm.Database.updateContactsTable(Contacts);
+        //}
 
-        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            MainForm.Database.updateContactsTable(Contacts);
-        }
-        private void dataGridView1_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
-        {
-            MainForm.Database.updateContactsTable(Contacts);
-        }
+        //private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    MainForm.Database.updateContactsTable(Contacts);
+        //}
+        //private void dataGridView1_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        //{
+        //    MainForm.Database.updateContactsTable(Contacts);
+        //}
 
-        private void Contacts_list_form_FormClosing(object sender, FormClosingEventArgs e)
+        //private void Contacts_list_form_FormClosing(object sender, FormClosingEventArgs e)
+        //{
+        //    // save changes when closing
+        //    MainForm.Database.updateContactsTable(Contacts);
+        //}
+
+        private void btnSave_Click(object sender, EventArgs e)
         {
-            // save changes when closing
             MainForm.Database.updateContactsTable(Contacts);
         }
     }

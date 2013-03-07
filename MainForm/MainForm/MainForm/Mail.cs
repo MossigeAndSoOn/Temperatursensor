@@ -55,25 +55,33 @@ namespace MainForm
             }
             catch (Exception ex)
             {
+                Error.WriteLog("sendMail", ex.Message, "");
                 // something failed, return error message
                 return "Error: " + ex.Message;
             }
         }
         public static void sendMailToEntireContactsList(string subject, string message)
         {
-            // get contacts list from database
-            DataTable contactsListDataTable = Database.readContactsTable();
-
-            // sort thru the names
-            string recieverMailAddress = "";
-            string recieverName = "";
-            foreach (DataRow row in contactsListDataTable.Rows)
+            try
             {
-                recieverName = row["Name"].ToString();
-                recieverMailAddress = row["Email"].ToString();
+                // get contacts list from database
+                DataTable contactsListDataTable = Database.readContactsTable();
 
-                // send a mail to each entry in the contacts list
-                Mail.sendMail(recieverMailAddress, recieverName, subject, message);
+                // sort thru the names
+                string recieverMailAddress = "";
+                string recieverName = "";
+                foreach (DataRow row in contactsListDataTable.Rows)
+                {
+                    recieverName = row["Name"].ToString();
+                    recieverMailAddress = row["Email"].ToString();
+
+                    // send a mail to each entry in the contacts list
+                    Mail.sendMail(recieverMailAddress, recieverName, subject, message);
+                }
+            }
+            catch (Exception ex)
+            {
+                Error.WriteLog("email entire contact list", ex.Message, "");
             }
         }
 
@@ -117,7 +125,7 @@ namespace MainForm
             }
             catch (Exception ex)
             {
-                Error.WriteLog("Read mail", ex.Message, "");
+                Error.WriteLog("read Mail", ex.Message, "Read mail failed");
             }
             // return the array of unread mails
             return unreadMail;

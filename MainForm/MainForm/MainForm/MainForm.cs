@@ -12,8 +12,7 @@ namespace MainForm
 {
     public partial class MainForm : Form
     {
-
-
+        public static int sensorValue = 20;
         private NotifyIcon m_notifyicon = new NotifyIcon();
         private ContextMenu m_menu = new ContextMenu();        
         int dataPointsInChart = 15;
@@ -26,13 +25,15 @@ namespace MainForm
         {
             try
             {
+                //pictureBox1.Image = new System.Drawing.Bitmap("exclamation-green.png");
+                pictureBox1.Image = Error.exclamationGet();
                 populateSettingsDefault();
                 // display graphics
                 populateChart(dataPointsInChart);
                 // remove unnessesary legend on top right of chart
                 this.chart1.Legends.RemoveAt(0);
                 // start timer 
-                MainTimer.Interval = 60000 * Properties.Settings.Default.sensorReadInterval;
+                MainTimer.Interval = 1000 * Properties.Settings.Default.sensorReadInterval;
                 MainTimer.Enabled = true;
                 // disallow resizing
                 this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -46,19 +47,26 @@ namespace MainForm
 // ----------------TRAY ICON RELATED----------------------------------------------
         private void makeTrayIcon()
         {
-            this.m_menu.MenuItems.Add(0,
-                new MenuItem("Show", new System.EventHandler(Show_Click)));
-            this.m_menu.MenuItems.Add(1,
-                new MenuItem("Hide", new System.EventHandler(Hide_Click)));
-            this.m_menu.MenuItems.Add(2,
-                new MenuItem("Exit", new System.EventHandler(Exit_Click)));
+            try
+            {
+                this.m_menu.MenuItems.Add(0,
+                    new MenuItem("Show", new System.EventHandler(Show_Click)));
+                this.m_menu.MenuItems.Add(1,
+                    new MenuItem("Hide", new System.EventHandler(Hide_Click)));
+                this.m_menu.MenuItems.Add(2,
+                    new MenuItem("Exit", new System.EventHandler(Exit_Click)));
 
-            this.m_notifyicon.Text = "Right click for context menu";
-            this.m_notifyicon.Visible = true;
-            this.m_notifyicon.Icon = new Icon("3highres.ico");
-            this.m_notifyicon.ContextMenu = m_menu;
-            this.m_notifyicon.DoubleClick += new EventHandler(notifyIconDoubbleClicked);
-            this.SizeChanged += new System.EventHandler(this.MainFormSizeChanged);
+                this.m_notifyicon.Text = "Right click for context menu";
+                this.m_notifyicon.Visible = true;
+                this.m_notifyicon.Icon = new Icon("3highres.ico");
+                this.m_notifyicon.ContextMenu = m_menu;
+                this.m_notifyicon.DoubleClick += new EventHandler(notifyIconDoubbleClicked);
+                this.SizeChanged += new System.EventHandler(this.MainFormSizeChanged);
+            }
+            catch (Exception ex)
+            {
+                Error.WriteLog("makeTrayIcon", ex.Message, "");
+            }
         }
 
         private void MainFormSizeChanged(Object sender, EventArgs e)
@@ -98,14 +106,21 @@ namespace MainForm
         }
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //if (e.CloseReason = CloseReason.WindowsShutDown)
-            //{
-            //    MessageBox.Show("Noooo, dont go!");
-            //}
-            //if(
-            //e.Cancel = true;
-            //Hide();
-            m_notifyicon.Dispose();
+            try
+            {
+                //if (e.CloseReason = CloseReason.WindowsShutDown)
+                //{
+                //    MessageBox.Show("Noooo, dont go!");
+                //}
+                //if(
+                //e.Cancel = true;
+                //Hide();
+                m_notifyicon.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Error.WriteLog("form-closing", ex.Message, "");
+            }
         }
 
 // --------------end trayicon related------------------------------------------
@@ -162,6 +177,17 @@ namespace MainForm
                 Font headingFont = new Font(FontFamily.GenericSansSerif, 14);
                 this.chart1.Titles.Clear();
                 this.chart1.Titles.Add("Last " + numPoints + " readings:").Font = headingFont;
+
+
+                // Methodes for desplaying lowest, hightst or avarage temperature in text fields.
+
+
+
+
+
+
+
+
             }
             catch (Exception ex)
             {
@@ -171,62 +197,86 @@ namespace MainForm
 
         private void btnMoreData_Click(object sender, EventArgs e)
         {
-            dataPointsInChart += 5;
-            populateChart(dataPointsInChart);
+            try
+            {
+                dataPointsInChart += 5;
+                populateChart(dataPointsInChart);
+            }
+            catch (Exception ex)
+            {
+                Error.WriteLog("btnMoreData-click", ex.Message, "");
+            }
         }
 
         private void btnLessData_Click(object sender, EventArgs e)
         {
-            if (dataPointsInChart >= 10)
+            try
             {
-                dataPointsInChart -= 5;
+                if (dataPointsInChart >= 10)
+                {
+                    dataPointsInChart -= 5;
+                }
+                populateChart(dataPointsInChart);
             }
-            populateChart(dataPointsInChart);
+            catch (Exception ex)
+            {
+                Error.WriteLog("btnLessData-click", ex.Message, "");
+            }
         }
 
         private void MainTimer_Tick(object sender, EventArgs e)
         {
-            // read from Sensor
-            // using textBox to test
-            int sensorValue = Convert.ToInt16(textBox1.Text);
-
-            // save sensor data to database
-            Database.addSensorDataToMDB(sensorValue);
-            // update chart
-            populateChart(dataPointsInChart);
-
-            // check if values are outside limits
-            if (sensorValue > Properties.Settings.Default.tempMax) 
+            try
             {
-                // temperature too high
-                if (Properties.Settings.Default.warnMail == true) // send mail
+                // read from Sensor
+                // using textBox to test
+                sensorValue = Convert.ToInt16(textBox1.Text);
+
+                // save sensor data to database
+                Database.addSensorDataToMDB(sensorValue);
+                // update chart
+                populateChart(dataPointsInChart);
+
+                // update status image 
+                pictureBox1.Image = Error.exclamationGet();
+
+                // check if values are outside limits
+                if (sensorValue > Properties.Settings.Default.tempMax)
                 {
-                    Mail.sendMailToEntireContactsList("Temperature warning", "Temperature has exceeded the limit of: " + 
-                        Properties.Settings.Default.tempMax + " degrees\n" +
-                        "Last temperature reading was: " + sensorValue + " degrees\n");
+                    // temperature too high
+                    if (Properties.Settings.Default.warnMail == true) // send mail
+                    {
+                        Mail.sendMailToEntireContactsList("Temperature warning", "Temperature has exceeded the limit of: " +
+                            Properties.Settings.Default.tempMax + " degrees\n" +
+                            "Last temperature reading was: " + sensorValue + " degrees\n");
+                    }
+                    if (Properties.Settings.Default.warnSMS == true) // send SMS
+                    {
+                        SMS.sendSMSToEntireContactsList("Temperature warning", "Temperature has exceeded the limit of: " +
+                            Properties.Settings.Default.tempMax + " degrees\n" +
+                            "Last temperature reading was: " + sensorValue + " degrees\n");
+                    }
                 }
-                if (Properties.Settings.Default.warnSMS == true) // send SMS
+                if (sensorValue < Properties.Settings.Default.tempMin)
                 {
-                    SMS.sendSMSToEntireContactsList("Temperature warning", "Temperature has exceeded the limit of: " +
-                        Properties.Settings.Default.tempMax + " degrees\n" +
-                        "Last temperature reading was: " + sensorValue + " degrees\n");
+                    // temperature too low
+                    if (Properties.Settings.Default.warnMail == true) // send mail
+                    {
+                        Mail.sendMailToEntireContactsList("Temperature warning", "Temperature is below the limit of: " +
+                            Properties.Settings.Default.tempMin + " degrees\n" +
+                            "Last temperature reading was: " + sensorValue + " degrees\n");
+                    }
+                    if (Properties.Settings.Default.warnSMS == true) // send SMS
+                    {
+                        SMS.sendSMSToEntireContactsList("Temperature warning", "Temperature is below the limit of: " +
+                            Properties.Settings.Default.tempMin + " degrees\n" +
+                            "Last temperature reading was: " + sensorValue + " degrees\n");
+                    }
                 }
             }
-            if (sensorValue < Properties.Settings.Default.tempMin)
+            catch (Exception ex)
             {
-                // temperature too low
-                if (Properties.Settings.Default.warnMail == true) // send mail
-                {
-                    Mail.sendMailToEntireContactsList("Temperature warning", "Temperature is below the limit of: " +
-                        Properties.Settings.Default.tempMin + " degrees\n" +
-                        "Last temperature reading was: " + sensorValue + " degrees\n");
-                }
-                if (Properties.Settings.Default.warnSMS == true) // send SMS
-                {
-                    SMS.sendSMSToEntireContactsList("Temperature warning", "Temperature is below the limit of: " +
-                        Properties.Settings.Default.tempMin + " degrees\n" +
-                        "Last temperature reading was: " + sensorValue + " degrees\n");
-                }
+                Error.WriteLog("Timer1-tick", ex.Message, "");
             }
 
 
@@ -306,7 +356,9 @@ namespace MainForm
             //Error.WriteLog("main form", "sample error", "n comment");
         }
 
+        private void lblAver_Click(object sender, EventArgs e)
+        {
 
-
+        }
     }
 }

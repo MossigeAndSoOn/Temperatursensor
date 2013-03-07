@@ -42,7 +42,9 @@
             this.txtMax = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.btnDefaults = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -52,13 +54,19 @@
             this.checkSMS = new System.Windows.Forms.CheckBox();
             this.checkMail = new System.Windows.Forms.CheckBox();
             this.MainTimer = new System.Windows.Forms.Timer(this.components);
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.txtLowest = new System.Windows.Forms.TextBox();
+            this.txtHigh = new System.Windows.Forms.TextBox();
+            this.txtAvar = new System.Windows.Forms.TextBox();
+            this.lbllow = new System.Windows.Forms.Label();
+            this.lblAver = new System.Windows.Forms.Label();
+            this.lblHigh = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.grBoxSettings.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // chart1
@@ -75,14 +83,14 @@
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(358, 156);
+            this.chart1.Size = new System.Drawing.Size(440, 156);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
             // btnMoreData
             // 
             this.btnMoreData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMoreData.Location = new System.Drawing.Point(377, 12);
+            this.btnMoreData.Location = new System.Drawing.Point(459, 12);
             this.btnMoreData.Name = "btnMoreData";
             this.btnMoreData.Size = new System.Drawing.Size(97, 23);
             this.btnMoreData.TabIndex = 1;
@@ -93,7 +101,7 @@
             // btnLessData
             // 
             this.btnLessData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLessData.Location = new System.Drawing.Point(377, 42);
+            this.btnLessData.Location = new System.Drawing.Point(459, 42);
             this.btnLessData.Name = "btnLessData";
             this.btnLessData.Size = new System.Drawing.Size(97, 23);
             this.btnLessData.TabIndex = 1;
@@ -104,7 +112,9 @@
             // grBoxSettings
             // 
             this.grBoxSettings.Controls.Add(this.groupBox3);
+            this.grBoxSettings.Controls.Add(this.button1);
             this.grBoxSettings.Controls.Add(this.btnDefaults);
+            this.grBoxSettings.Controls.Add(this.textBox1);
             this.grBoxSettings.Controls.Add(this.btnSave);
             this.grBoxSettings.Controls.Add(this.groupBox2);
             this.grBoxSettings.Controls.Add(this.groupBox1);
@@ -160,6 +170,16 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Max:";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(425, 35);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(32, 23);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "test";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // btnDefaults
             // 
             this.btnDefaults.Location = new System.Drawing.Point(362, 124);
@@ -169,6 +189,14 @@
             this.btnDefaults.Text = "Reset to defaults";
             this.btnDefaults.UseVisualStyleBackColor = true;
             this.btnDefaults.Click += new System.EventHandler(this.btnDefaults_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(374, 38);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(45, 20);
+            this.textBox1.TabIndex = 3;
+            this.textBox1.Text = "20";
             // 
             // btnSave
             // 
@@ -194,17 +222,17 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(56, 22);
+            this.label1.Location = new System.Drawing.Point(67, 22);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 13);
+            this.label1.Size = new System.Drawing.Size(49, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Minutes";
+            this.label1.Text = "Seconds";
             // 
             // txtInterval
             // 
             this.txtInterval.Location = new System.Drawing.Point(6, 19);
             this.txtInterval.Name = "txtInterval";
-            this.txtInterval.Size = new System.Drawing.Size(44, 20);
+            this.txtInterval.Size = new System.Drawing.Size(55, 20);
             this.txtInterval.TabIndex = 0;
             // 
             // groupBox1
@@ -253,31 +281,76 @@
             // 
             this.MainTimer.Tick += new System.EventHandler(this.MainTimer_Tick);
             // 
-            // textBox1
+            // pictureBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(386, 122);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(45, 20);
-            this.textBox1.TabIndex = 3;
-            this.textBox1.Text = "20";
+            this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
+            this.pictureBox1.Location = new System.Drawing.Point(463, 71);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 98);
+            this.pictureBox1.TabIndex = 5;
+            this.pictureBox1.TabStop = false;
             // 
-            // button1
+            // txtLowest
             // 
-            this.button1.Location = new System.Drawing.Point(437, 119);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(32, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "test";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.txtLowest.Location = new System.Drawing.Point(487, 200);
+            this.txtLowest.Name = "txtLowest";
+            this.txtLowest.Size = new System.Drawing.Size(76, 20);
+            this.txtLowest.TabIndex = 6;
+            // 
+            // txtHigh
+            // 
+            this.txtHigh.Location = new System.Drawing.Point(488, 301);
+            this.txtHigh.Name = "txtHigh";
+            this.txtHigh.Size = new System.Drawing.Size(75, 20);
+            this.txtHigh.TabIndex = 7;
+            // 
+            // txtAvar
+            // 
+            this.txtAvar.Location = new System.Drawing.Point(487, 250);
+            this.txtAvar.Name = "txtAvar";
+            this.txtAvar.Size = new System.Drawing.Size(76, 20);
+            this.txtAvar.TabIndex = 8;
+            // 
+            // lbllow
+            // 
+            this.lbllow.AutoSize = true;
+            this.lbllow.Location = new System.Drawing.Point(487, 184);
+            this.lbllow.Name = "lbllow";
+            this.lbllow.Size = new System.Drawing.Size(41, 13);
+            this.lbllow.TabIndex = 9;
+            this.lbllow.Text = "Lowest";
+            // 
+            // lblAver
+            // 
+            this.lblAver.AutoSize = true;
+            this.lblAver.Location = new System.Drawing.Point(487, 234);
+            this.lblAver.Name = "lblAver";
+            this.lblAver.Size = new System.Drawing.Size(47, 13);
+            this.lblAver.TabIndex = 10;
+            this.lblAver.Text = "Average";
+            this.lblAver.Click += new System.EventHandler(this.lblAver_Click);
+            // 
+            // lblHigh
+            // 
+            this.lblHigh.AutoSize = true;
+            this.lblHigh.Location = new System.Drawing.Point(487, 285);
+            this.lblHigh.Name = "lblHigh";
+            this.lblHigh.Size = new System.Drawing.Size(43, 13);
+            this.lblHigh.TabIndex = 11;
+            this.lblHigh.Text = "Highest";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(486, 334);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox1);
+            this.ClientSize = new System.Drawing.Size(568, 334);
+            this.Controls.Add(this.lblHigh);
+            this.Controls.Add(this.lblAver);
+            this.Controls.Add(this.lbllow);
+            this.Controls.Add(this.txtAvar);
+            this.Controls.Add(this.txtHigh);
+            this.Controls.Add(this.txtLowest);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.grBoxSettings);
             this.Controls.Add(this.btnLessData);
             this.Controls.Add(this.btnMoreData);
@@ -289,12 +362,14 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.grBoxSettings.ResumeLayout(false);
+            this.grBoxSettings.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -323,6 +398,13 @@
         private System.Windows.Forms.Button btnContacts;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.TextBox txtLowest;
+        private System.Windows.Forms.TextBox txtHigh;
+        private System.Windows.Forms.TextBox txtAvar;
+        private System.Windows.Forms.Label lbllow;
+        private System.Windows.Forms.Label lblAver;
+        private System.Windows.Forms.Label lblHigh;
     }
 }
 
