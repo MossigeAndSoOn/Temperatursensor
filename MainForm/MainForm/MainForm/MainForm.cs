@@ -12,7 +12,7 @@ namespace MainForm
 {
     public partial class MainForm : Form
     {
-        public static int sensorValue = 20;
+        public static decimal sensorValue = 20;
         private NotifyIcon m_notifyicon = new NotifyIcon();
         private ContextMenu m_menu = new ContextMenu();        
         int dataPointsInChart = 15;
@@ -25,7 +25,6 @@ namespace MainForm
         {
             try
             {
-                //pictureBox1.Image = new System.Drawing.Bitmap("exclamation-green.png");
                 pictureBox1.Image = Error.exclamationGet();
                 populateSettingsDefault();
                 // display graphics
@@ -230,7 +229,8 @@ namespace MainForm
             {
                 // read from Sensor
                 // using textBox to test
-                sensorValue = Convert.ToInt16(textBox1.Text);
+                //sensorValue = Convert.ToInt16(textBox1.Text);
+                sensorValue = Sensor.GetTemp();
 
                 // save sensor data to database
                 Database.addSensorDataToMDB(sensorValue);
