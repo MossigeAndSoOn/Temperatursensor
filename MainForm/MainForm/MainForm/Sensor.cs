@@ -36,6 +36,7 @@ namespace MainForm
             catch (Exception ex)
             {
                 Error.WriteLog("Sensor", ex.Message, "GetTemp failed");
+                return new decimal(0);
             }
         }
     }

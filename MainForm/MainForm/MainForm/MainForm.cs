@@ -219,8 +219,8 @@ namespace MainForm
             {
                 // read from Sensor
                 // using textBox to test
-                //sensorValue = Convert.ToInt16(textBox1.Text);
-                sensorValue = Sensor.GetTemp();
+                sensorValue = Convert.ToInt16(textBox1.Text);
+                //sensorValue = Sensor.GetTemp();
 
                 // save sensor data to database
                 Database.addSensorDataToMDB(sensorValue);
