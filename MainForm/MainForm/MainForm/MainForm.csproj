@@ -68,6 +68,7 @@
     <Compile Include="Mail.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sensor.cs" />
     <Compile Include="SMS.cs" />
     <EmbeddedResource Include="Contacts_list_form.resx">
       <DependentUpon>Contacts_list_form.cs</DependentUpon>
