@@ -222,6 +222,39 @@ namespace MainForm
                 Error.WriteLog("Database", ex.Message, "addSensorDataToMDB");
             }
         }
+        public static void addSensorDataToMDB(decimal temperature, string comment)
+        {
+            try
+            {
+                // add sensordata and timestamp with comment
+                string lSQL = "INSERT INTO SensorData (Temperature, DateString, TimeString, Comment) VALUES (" +
+                    temperature.ToString() + ",'" +
+                    DateTime.Now.ToShortDateString().ToString() + "','" +
+                    DateTime.Now.ToShortTimeString().ToString() + "','" +
+                    comment + "')";
+                passSQLstringToMDB(lSQL);
+            }
+            catch (Exception ex)
+            {
+                Error.WriteLog("Database", ex.Message, "addSensorDataToMDB");
+            }
+        }
+        public static void addSensorDataToMDB(decimal temperature)
+        {
+            try
+            {
+                // add sensordata and timestamp with comment
+                string lSQL = "INSERT INTO SensorData (Temperature, DateString, TimeString) VALUES (" +
+                    temperature.ToString() + ",'" +
+                    DateTime.Now.ToShortDateString().ToString() + "','" +
+                    DateTime.Now.ToShortTimeString().ToString() + "')";
+                passSQLstringToMDB(lSQL);
+            }
+            catch (Exception ex)
+            {
+                Error.WriteLog("Database", ex.Message, "addSensorDataToMDB");
+            }
+        }
 
         public static DataTable readSensorDataFromMDB()
         {
