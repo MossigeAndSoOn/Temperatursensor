@@ -117,6 +117,7 @@ namespace MainForm
             }
             catch (Exception ex)
             {
+                Error.WriteLog("Read mail", ex.Message, "");
             }
             // return the array of unread mails
             return unreadMail;

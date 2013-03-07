@@ -20,7 +20,7 @@ namespace MainForm
             {
                 string sql = "Select ID, Name, Email, PhoneNumber from Contacts"; //Where 'Contacts' is the name of the table in the MDB file 
                 DataTable contacts = new DataTable();
-                contacts = passSQLstringToMDB(sql, "contact");
+                contacts = passSQLstringToMDB(sql);
 
                 return contacts;
             }
@@ -144,7 +144,7 @@ namespace MainForm
             try
             {
                 string sql = "DELETE FROM Contacts WHERE ID =" + rowID;
-                passSQLstringToMDB(sql, "contact");
+                passSQLstringToMDB(sql);
             }
             catch (Exception ex)
             {
@@ -153,7 +153,7 @@ namespace MainForm
             }
         }
 // ------------------- GENERAL---------------------------------------
-        public static DataTable passSQLstringToMDB(string sql, string db)
+        public static DataTable passSQLstringToMDB(string sql)
         {
             try
             {
@@ -198,7 +198,7 @@ namespace MainForm
                     temperature.ToString() + ",'" +
                     DateTime.Now.ToShortDateString().ToString() + "','" +
                     DateTime.Now.ToShortTimeString().ToString() + "')";
-                passSQLstringToMDB(lSQL, "sensor");
+                passSQLstringToMDB(lSQL);
             }
             catch (Exception ex)
             {
@@ -215,7 +215,7 @@ namespace MainForm
                     DateTime.Now.ToShortDateString().ToString() + "','" +
                     DateTime.Now.ToShortTimeString().ToString() + "','" +
                     comment + "')";
-                passSQLstringToMDB(lSQL, "sensor");
+                passSQLstringToMDB(lSQL);
             }
             catch (Exception ex)
             {
@@ -254,7 +254,7 @@ namespace MainForm
                 "Order By ID DESC";
             try
             {
-                DataTable plotpoints = passSQLstringToMDB(lSQL, "data");
+                DataTable plotpoints = passSQLstringToMDB(lSQL);
                 return plotpoints;
             }
             catch (Exception ex)
