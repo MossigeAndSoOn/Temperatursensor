@@ -10,10 +10,10 @@ namespace MainForm
     class Error
     {
         public static bool HasError = false;
-        Bitmap eYellow = new Bitmap("exclamation-yellow.png");
-        Bitmap eGreen = new Bitmap("exclamation-green.png");
-        Bitmap eBlue = new Bitmap("exclamation-blue.png");
-        Bitmap eRed = new Bitmap("exclamation-red.png");
+        //Bitmap eYellow = new Bitmap("exclamation-yellow.png");
+        //Bitmap eGreen = new Bitmap("exclamation-green.png");
+        //Bitmap eBlue = new Bitmap("exclamation-blue.png");
+        //Bitmap eRed = new Bitmap("exclamation-red.png");
 
         public static Bitmap exclamationGet()
         {

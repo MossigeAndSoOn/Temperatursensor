@@ -177,16 +177,6 @@ namespace MainForm
                 this.chart1.Titles.Clear();
                 this.chart1.Titles.Add("Last " + numPoints + " readings:").Font = headingFont;
 
-
-                // Methodes for desplaying lowest, hightst or avarage temperature in text fields.
-
-
-
-
-
-
-
-
             }
             catch (Exception ex)
             {
