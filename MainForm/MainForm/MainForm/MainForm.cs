@@ -32,7 +32,7 @@ namespace MainForm
                 // remove unnessesary legend on top right of chart
                 this.chart1.Legends.RemoveAt(0);
                 // start timer 
-                MainTimer.Interval = 1000 * Properties.Settings.Default.sensorReadInterval;
+                MainTimer.Interval = 60000 * Properties.Settings.Default.sensorReadInterval;
                 MainTimer.Enabled = true;
                 // disallow resizing
                 this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -147,14 +147,13 @@ namespace MainForm
                 Error.WriteLog("main form", ex.Message, "settings");
             }
         }
-
+//------------------------Chart-------------------------------------------
         private void populateChart(int numPoints) // populates Chart1 with the last temperature readings from the MDB
         {
             try
             {
                 // remove the default values
                 this.chart1.Series.Clear();
-
                 Series series1 = this.chart1.Series.Add("Temperature");
                 // make a spline type chart (can be set to show different types)
                 series1.ChartType = SeriesChartType.Spline;
@@ -163,7 +162,6 @@ namespace MainForm
                 chart1.ChartAreas[0].AxisX.Title = "Readings";
                 // change marker thickness
                 series1.BorderWidth = 5;
-
                 // add data points to the chart
                 this.chart1.Series[0].XValueType = ChartValueType.Auto;
                 DataTable points = Database.generatePlotPoints(numPoints);
@@ -176,7 +174,6 @@ namespace MainForm
                 Font headingFont = new Font(FontFamily.GenericSansSerif, 14);
                 this.chart1.Titles.Clear();
                 this.chart1.Titles.Add("Last " + numPoints + " readings:").Font = headingFont;
-
             }
             catch (Exception ex)
             {
@@ -212,65 +209,30 @@ namespace MainForm
                 Error.WriteLog("btnLessData-click", ex.Message, "");
             }
         }
-
+// -----------------------------Timer----------------------------------------
         private void MainTimer_Tick(object sender, EventArgs e)
         {
             try
             {
                 // read from Sensor
                 // using textBox to test
-                sensorValue = Convert.ToInt16(textBox1.Text);
                 //sensorValue = Sensor.GetTemp();
-
+                sensorValue = Convert.ToInt16(textBox1.Text);
                 // save sensor data to database
                 Database.addSensorDataToMDB(sensorValue);
                 // update chart
                 populateChart(dataPointsInChart);
-
                 // update status image 
                 pictureBox1.Image = Error.exclamationGet();
-
-                // check if values are outside limits
-                if (sensorValue > Properties.Settings.Default.tempMax)
-                {
-                    // temperature too high
-                    if (Properties.Settings.Default.warnMail == true) // send mail
-                    {
-                        Mail.sendMailToEntireContactsList("Temperature warning", "Temperature has exceeded the limit of: " +
-                            Properties.Settings.Default.tempMax + " degrees\n" +
-                            "Last temperature reading was: " + sensorValue + " degrees\n");
-                    }
-                    if (Properties.Settings.Default.warnSMS == true) // send SMS
-                    {
-                        SMS.sendSMSToEntireContactsList("Temperature warning", "Temperature has exceeded the limit of: " +
-                            Properties.Settings.Default.tempMax + " degrees\n" +
-                            "Last temperature reading was: " + sensorValue + " degrees\n");
-                    }
-                }
-                if (sensorValue < Properties.Settings.Default.tempMin)
-                {
-                    // temperature too low
-                    if (Properties.Settings.Default.warnMail == true) // send mail
-                    {
-                        Mail.sendMailToEntireContactsList("Temperature warning", "Temperature is below the limit of: " +
-                            Properties.Settings.Default.tempMin + " degrees\n" +
-                            "Last temperature reading was: " + sensorValue + " degrees\n");
-                    }
-                    if (Properties.Settings.Default.warnSMS == true) // send SMS
-                    {
-                        SMS.sendSMSToEntireContactsList("Temperature warning", "Temperature is below the limit of: " +
-                            Properties.Settings.Default.tempMin + " degrees\n" +
-                            "Last temperature reading was: " + sensorValue + " degrees\n");
-                    }
-                }
+                // check if, send warning
+                ClientFeedback.determineNeedForWarning(sensorValue);
             }
             catch (Exception ex)
             {
                 Error.WriteLog("Timer1-tick", ex.Message, "");
             }
-
-
         }
+//-----------------Settings-----------------------------------------------
         private void btnSave_Click(object sender, EventArgs e)
         {
             try
@@ -328,8 +290,6 @@ namespace MainForm
                 // this error will never happen
                 string errorMessage = "Could not set data to form: " + ex.Message;
                 MessageBox.Show(errorMessage);
-                // write error to log
-                //errorLog_class.WriteTextFile.WriteError(errorMessage);
             }
         }
 
@@ -343,12 +303,6 @@ namespace MainForm
         {
             Database.addSensorDataToMDB(Convert.ToInt16(textBox1.Text));
             populateChart(dataPointsInChart);
-            //Error.WriteLog("main form", "sample error", "n comment");
-        }
-
-        private void lblAver_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

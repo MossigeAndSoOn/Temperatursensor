@@ -328,7 +328,6 @@
             this.lblAver.Size = new System.Drawing.Size(47, 13);
             this.lblAver.TabIndex = 10;
             this.lblAver.Text = "Average";
-            this.lblAver.Click += new System.EventHandler(this.lblAver_Click);
             // 
             // lblHigh
             // 

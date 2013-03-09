@@ -10,10 +10,10 @@ namespace MainForm
     class Error
     {
         public static bool HasError = false;
-        //Bitmap eYellow = new Bitmap("exclamation-yellow.png");
-        //Bitmap eGreen = new Bitmap("exclamation-green.png");
-        //Bitmap eBlue = new Bitmap("exclamation-blue.png");
-        //Bitmap eRed = new Bitmap("exclamation-red.png");
+        private static Bitmap eYellow = image.ResizeBitmap(new Bitmap("exclamation-yellow.png"), 100, 98);
+        private static Bitmap eGreen = image.ResizeBitmap(new Bitmap("exclamation-green.png"), 100, 98);
+        private static Bitmap eBlue = image.ResizeBitmap(new Bitmap("exclamation-blue.png"), 100, 98);
+        private static Bitmap eRed = image.ResizeBitmap(new Bitmap("exclamation-red.png"), 100, 98);
 
         public static Bitmap exclamationGet()
         {
@@ -21,24 +21,24 @@ namespace MainForm
             {
                 if (HasError == true) // error
                 {
-                    return image.ResizeBitmap(new Bitmap("exclamation-yellow.png"), 100, 98);
+                    return eYellow;
                 }
                 else // no error
                 {
                     if (MainForm.sensorValue < Properties.Settings.Default.tempMin)
                     {
                         // temp too low
-                        return image.ResizeBitmap(new Bitmap("exclamation-blue.png"), 100, 98);
+                        return eBlue;
                     }
                     if (MainForm.sensorValue > Properties.Settings.Default.tempMax)
                     {
                         // temp too high
-                        return image.ResizeBitmap(new Bitmap("exclamation-red.png"), 100, 98);
+                        return eRed;
                     }
                     else
                     {
                         // temperature just right
-                        return image.ResizeBitmap(new Bitmap("exclamation-green.png"), 100, 98);
+                        return eGreen;
                     }
                 }
             }
@@ -46,7 +46,7 @@ namespace MainForm
             {
                 HasError = true;
                 Error.WriteLog("Error", ex.Message, "error on color excl mark");
-                return image.ResizeBitmap(new Bitmap("exclamation-yellow.png"), 100, 98);
+                return eYellow;
             }
         }
         public static void WriteLog(string origin, string errorMsg, string comment)

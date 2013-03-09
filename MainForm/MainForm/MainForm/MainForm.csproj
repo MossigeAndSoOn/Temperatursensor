@@ -67,6 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientFeedback.cs" />
     <Compile Include="Contacts_list_form.cs">
       <SubType>Form</SubType>
     </Compile>
