@@ -227,8 +227,8 @@ namespace MainForm
             try
             {
                 // add sensordata and timestamp with comment
-                string lSQL = "INSERT INTO SensorData (Temperature, DateString, TimeString, Comment) VALUES (" +
-                    temperature.ToString() + ",'" +
+                string lSQL = "INSERT INTO SensorData (Temperature, DateString, TimeString, Comment) VALUES ('" +
+                    temperature.ToString() + "','" +
                     DateTime.Now.ToShortDateString().ToString() + "','" +
                     DateTime.Now.ToShortTimeString().ToString() + "','" +
                     comment + "')";
@@ -244,8 +244,8 @@ namespace MainForm
             try
             {
                 // add sensordata and timestamp with comment
-                string lSQL = "INSERT INTO SensorData (Temperature, DateString, TimeString) VALUES (" +
-                    temperature.ToString() + ",'" +
+                string lSQL = "INSERT INTO SensorData (Temperature, DateString, TimeString) VALUES ('" +
+                    temperature.ToString() + "','" +
                     DateTime.Now.ToShortDateString().ToString() + "','" +
                     DateTime.Now.ToShortTimeString().ToString() + "')";
                 passSQLstringToMDB(lSQL);

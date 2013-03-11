@@ -32,7 +32,7 @@ namespace MainForm
                 // remove unnessesary legend on top right of chart
                 this.chart1.Legends.RemoveAt(0);
                 // start timer 
-                MainTimer.Interval = 60000 * Properties.Settings.Default.sensorReadInterval;
+                MainTimer.Interval = 1000 * Properties.Settings.Default.sensorReadInterval;
                 MainTimer.Enabled = true;
                 // disallow resizing
                 this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -150,8 +150,8 @@ namespace MainForm
 //------------------------Chart-------------------------------------------
         private void populateChart(int numPoints) // populates Chart1 with the last temperature readings from the MDB
         {
-            try
-            {
+            //try
+            //{
                 // remove the default values
                 this.chart1.Series.Clear();
                 Series series1 = this.chart1.Series.Add("Temperature");
@@ -168,17 +168,17 @@ namespace MainForm
                 foreach (DataRow row in points.Rows)
                 {
                     series1.Points.AddXY(Convert.ToInt32(row["ID"].ToString()),
-                        Convert.ToInt32(row["Temperature"].ToString()));
+                        Convert.ToDecimal(row["Temperature"].ToString()));
                 }
                 // add a nice heading
                 Font headingFont = new Font(FontFamily.GenericSansSerif, 14);
                 this.chart1.Titles.Clear();
                 this.chart1.Titles.Add("Last " + numPoints + " readings:").Font = headingFont;
-            }
-            catch (Exception ex)
-            {
-                Error.WriteLog("Main form", ex.Message, "chart");
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Error.WriteLog("Main form", ex.Message, "chart");
+            //}
         }
 
         private void btnMoreData_Click(object sender, EventArgs e)
@@ -216,8 +216,9 @@ namespace MainForm
             {
                 // read from Sensor
                 // using textBox to test
-                //sensorValue = Sensor.GetTemp();
-                sensorValue = Convert.ToInt16(textBox1.Text);
+                sensorValue = Sensor.GetTemp();
+                //sensorValue = Convert.ToInt16(Sensor.GetTemp());
+                //sensorValue = Convert.ToInt16(textBox1.Text);
                 // save sensor data to database
                 Database.addSensorDataToMDB(sensorValue);
                 // update chart
@@ -297,12 +298,6 @@ namespace MainForm
         {
             MDB_readerClass.Contacts_list_form contacts = new MDB_readerClass.Contacts_list_form();
             contacts.ShowDialog();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Database.addSensorDataToMDB(Convert.ToInt16(textBox1.Text));
-            populateChart(dataPointsInChart);
         }
     }
 }

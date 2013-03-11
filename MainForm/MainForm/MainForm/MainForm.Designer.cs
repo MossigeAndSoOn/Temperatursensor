@@ -42,9 +42,7 @@
             this.txtMax = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.btnDefaults = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -112,9 +110,7 @@
             // grBoxSettings
             // 
             this.grBoxSettings.Controls.Add(this.groupBox3);
-            this.grBoxSettings.Controls.Add(this.button1);
             this.grBoxSettings.Controls.Add(this.btnDefaults);
-            this.grBoxSettings.Controls.Add(this.textBox1);
             this.grBoxSettings.Controls.Add(this.btnSave);
             this.grBoxSettings.Controls.Add(this.groupBox2);
             this.grBoxSettings.Controls.Add(this.groupBox1);
@@ -170,16 +166,6 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Max:";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(425, 35);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(32, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "test";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // btnDefaults
             // 
             this.btnDefaults.Location = new System.Drawing.Point(362, 124);
@@ -189,14 +175,6 @@
             this.btnDefaults.Text = "Reset to defaults";
             this.btnDefaults.UseVisualStyleBackColor = true;
             this.btnDefaults.Click += new System.EventHandler(this.btnDefaults_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(374, 38);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(45, 20);
-            this.textBox1.TabIndex = 3;
-            this.textBox1.Text = "20";
             // 
             // btnSave
             // 
@@ -361,7 +339,6 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.grBoxSettings.ResumeLayout(false);
-            this.grBoxSettings.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -395,8 +372,6 @@
         private System.Windows.Forms.CheckBox checkMail;
         private System.Windows.Forms.Timer MainTimer;
         private System.Windows.Forms.Button btnContacts;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TextBox txtLowest;
         private System.Windows.Forms.TextBox txtHigh;
