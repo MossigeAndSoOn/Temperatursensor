@@ -220,13 +220,16 @@ namespace MainForm
                 //sensorValue = Convert.ToInt16(Sensor.GetTemp());
                 //sensorValue = Convert.ToInt16(textBox1.Text);
                 // save sensor data to database
-                Database.addSensorDataToMDB(sensorValue);
-                // update chart
-                populateChart(dataPointsInChart);
-                // update status image 
-                pictureBox1.Image = Error.exclamationGet();
-                // check if, send warning
-                ClientFeedback.determineNeedForWarning(sensorValue);
+                if (Error.HasSensor == true)
+                {
+                    Database.addSensorDataToMDB(sensorValue);
+                    // update chart
+                    populateChart(dataPointsInChart);
+                    // update status image 
+                    pictureBox1.Image = Error.exclamationGet();
+                    // check if, send warning
+                    ClientFeedback.determineNeedForWarning(sensorValue);
+                }
             }
             catch (Exception ex)
             {

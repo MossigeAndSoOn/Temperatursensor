@@ -10,6 +10,7 @@ namespace MainForm
     class Error
     {
         public static bool HasError = false;
+        public static bool HasSensor = false;
         private static Bitmap eYellow = image.ResizeBitmap(new Bitmap("exclamation-yellow.png"), 100, 98);
         private static Bitmap eGreen = image.ResizeBitmap(new Bitmap("exclamation-green.png"), 100, 98);
         private static Bitmap eBlue = image.ResizeBitmap(new Bitmap("exclamation-blue.png"), 100, 98);

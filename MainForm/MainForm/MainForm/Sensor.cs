@@ -31,12 +31,14 @@ namespace MainForm
                 AnalogSingleChannelReader reader = new
                 AnalogSingleChannelReader(temperatureTask.Stream);
                 double analogDataIn = reader.ReadSingleSample();
+                Error.HasSensor = true;
                 return Convert.ToDecimal(analogDataIn.ToString("0.0"));
             }
             catch (Exception ex)
             {
                 Error.WriteLog("Sensor", ex.Message, "GetTemp failed");
-                return new decimal(0);
+                Error.HasSensor = false;
+                return new decimal(-999);
             }
         }
     }
