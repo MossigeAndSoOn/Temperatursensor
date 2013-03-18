@@ -74,6 +74,18 @@ namespace MainForm
                             "Last temperature reading was: " + sensorValue + " degrees\n");
                     }
                 }
+                //if (Error.HasError == true)
+                //{
+                //    // Error occured
+                //    if (Properties.Settings.Default.warnMail == true) // send mail
+                //    {
+                //        Mail.sendMailToEntireContactsList("Error", "An error has occured");
+                //    }
+                //    if (Properties.Settings.Default.warnSMS == true) // send SMS
+                //    {
+                //        SMS.sendSMSToEntireContactsList("Error", "An error has occured");
+                //    }
+                //}
             }
             catch (Exception ex)
             {

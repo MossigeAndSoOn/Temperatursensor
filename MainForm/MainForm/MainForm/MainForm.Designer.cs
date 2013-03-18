@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.btnMoreData = new System.Windows.Forms.Button();
@@ -59,6 +59,10 @@
             this.lbllow = new System.Windows.Forms.Label();
             this.lblAver = new System.Windows.Forms.Label();
             this.lblHigh = new System.Windows.Forms.Label();
+            this.btnUp = new System.Windows.Forms.Button();
+            this.btnDown = new System.Windows.Forms.Button();
+            this.btnPlus = new System.Windows.Forms.Button();
+            this.btnMinus = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.grBoxSettings.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -71,24 +75,24 @@
             // 
             this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart1.Legends.Add(legend2);
             this.chart1.Location = new System.Drawing.Point(13, 13);
             this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(440, 156);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chart1.Series.Add(series2);
+            this.chart1.Size = new System.Drawing.Size(444, 205);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
             // btnMoreData
             // 
             this.btnMoreData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMoreData.Location = new System.Drawing.Point(459, 12);
+            this.btnMoreData.Location = new System.Drawing.Point(466, 3);
             this.btnMoreData.Name = "btnMoreData";
             this.btnMoreData.Size = new System.Drawing.Size(97, 23);
             this.btnMoreData.TabIndex = 1;
@@ -99,7 +103,7 @@
             // btnLessData
             // 
             this.btnLessData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLessData.Location = new System.Drawing.Point(459, 42);
+            this.btnLessData.Location = new System.Drawing.Point(466, 26);
             this.btnLessData.Name = "btnLessData";
             this.btnLessData.Size = new System.Drawing.Size(97, 23);
             this.btnLessData.TabIndex = 1;
@@ -114,7 +118,7 @@
             this.grBoxSettings.Controls.Add(this.btnSave);
             this.grBoxSettings.Controls.Add(this.groupBox2);
             this.grBoxSettings.Controls.Add(this.groupBox1);
-            this.grBoxSettings.Location = new System.Drawing.Point(13, 175);
+            this.grBoxSettings.Location = new System.Drawing.Point(13, 224);
             this.grBoxSettings.Name = "grBoxSettings";
             this.grBoxSettings.Size = new System.Drawing.Size(468, 156);
             this.grBoxSettings.TabIndex = 2;
@@ -262,7 +266,7 @@
             // pictureBox1
             // 
             this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
-            this.pictureBox1.Location = new System.Drawing.Point(463, 71);
+            this.pictureBox1.Location = new System.Drawing.Point(466, 120);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 98);
             this.pictureBox1.TabIndex = 5;
@@ -270,21 +274,21 @@
             // 
             // txtLowest
             // 
-            this.txtLowest.Location = new System.Drawing.Point(487, 200);
+            this.txtLowest.Location = new System.Drawing.Point(487, 249);
             this.txtLowest.Name = "txtLowest";
             this.txtLowest.Size = new System.Drawing.Size(76, 20);
             this.txtLowest.TabIndex = 6;
             // 
             // txtHigh
             // 
-            this.txtHigh.Location = new System.Drawing.Point(488, 301);
+            this.txtHigh.Location = new System.Drawing.Point(488, 350);
             this.txtHigh.Name = "txtHigh";
             this.txtHigh.Size = new System.Drawing.Size(75, 20);
             this.txtHigh.TabIndex = 7;
             // 
             // txtAvar
             // 
-            this.txtAvar.Location = new System.Drawing.Point(487, 250);
+            this.txtAvar.Location = new System.Drawing.Point(487, 299);
             this.txtAvar.Name = "txtAvar";
             this.txtAvar.Size = new System.Drawing.Size(76, 20);
             this.txtAvar.TabIndex = 8;
@@ -292,7 +296,7 @@
             // lbllow
             // 
             this.lbllow.AutoSize = true;
-            this.lbllow.Location = new System.Drawing.Point(487, 184);
+            this.lbllow.Location = new System.Drawing.Point(487, 233);
             this.lbllow.Name = "lbllow";
             this.lbllow.Size = new System.Drawing.Size(41, 13);
             this.lbllow.TabIndex = 9;
@@ -301,7 +305,7 @@
             // lblAver
             // 
             this.lblAver.AutoSize = true;
-            this.lblAver.Location = new System.Drawing.Point(487, 234);
+            this.lblAver.Location = new System.Drawing.Point(487, 283);
             this.lblAver.Name = "lblAver";
             this.lblAver.Size = new System.Drawing.Size(47, 13);
             this.lblAver.TabIndex = 10;
@@ -310,27 +314,71 @@
             // lblHigh
             // 
             this.lblHigh.AutoSize = true;
-            this.lblHigh.Location = new System.Drawing.Point(487, 285);
+            this.lblHigh.Location = new System.Drawing.Point(487, 334);
             this.lblHigh.Name = "lblHigh";
             this.lblHigh.Size = new System.Drawing.Size(43, 13);
             this.lblHigh.TabIndex = 11;
             this.lblHigh.Text = "Highest";
             // 
+            // btnUp
+            // 
+            this.btnUp.Location = new System.Drawing.Point(466, 55);
+            this.btnUp.Name = "btnUp";
+            this.btnUp.Size = new System.Drawing.Size(45, 23);
+            this.btnUp.TabIndex = 12;
+            this.btnUp.Text = "Up";
+            this.btnUp.UseVisualStyleBackColor = true;
+            this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
+            // 
+            // btnDown
+            // 
+            this.btnDown.Location = new System.Drawing.Point(521, 55);
+            this.btnDown.Name = "btnDown";
+            this.btnDown.Size = new System.Drawing.Size(45, 23);
+            this.btnDown.TabIndex = 13;
+            this.btnDown.Text = "Down";
+            this.btnDown.UseVisualStyleBackColor = true;
+            this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
+            // 
+            // btnPlus
+            // 
+            this.btnPlus.Location = new System.Drawing.Point(466, 78);
+            this.btnPlus.Name = "btnPlus";
+            this.btnPlus.Size = new System.Drawing.Size(45, 23);
+            this.btnPlus.TabIndex = 14;
+            this.btnPlus.Text = "+";
+            this.btnPlus.UseVisualStyleBackColor = true;
+            this.btnPlus.Click += new System.EventHandler(this.btnPlus_Click);
+            // 
+            // btnMinus
+            // 
+            this.btnMinus.Location = new System.Drawing.Point(521, 77);
+            this.btnMinus.Name = "btnMinus";
+            this.btnMinus.Size = new System.Drawing.Size(45, 23);
+            this.btnMinus.TabIndex = 15;
+            this.btnMinus.Text = "-";
+            this.btnMinus.UseVisualStyleBackColor = true;
+            this.btnMinus.Click += new System.EventHandler(this.btnMinus_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(568, 334);
+            this.ClientSize = new System.Drawing.Size(572, 392);
+            this.Controls.Add(this.btnMinus);
+            this.Controls.Add(this.btnPlus);
+            this.Controls.Add(this.btnDown);
+            this.Controls.Add(this.btnUp);
             this.Controls.Add(this.lblHigh);
             this.Controls.Add(this.lblAver);
             this.Controls.Add(this.lbllow);
             this.Controls.Add(this.txtAvar);
             this.Controls.Add(this.txtHigh);
+            this.Controls.Add(this.btnMoreData);
+            this.Controls.Add(this.btnLessData);
             this.Controls.Add(this.txtLowest);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.grBoxSettings);
-            this.Controls.Add(this.btnLessData);
-            this.Controls.Add(this.btnMoreData);
             this.Controls.Add(this.chart1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
@@ -379,6 +427,10 @@
         private System.Windows.Forms.Label lbllow;
         private System.Windows.Forms.Label lblAver;
         private System.Windows.Forms.Label lblHigh;
+        private System.Windows.Forms.Button btnUp;
+        private System.Windows.Forms.Button btnDown;
+        private System.Windows.Forms.Button btnPlus;
+        private System.Windows.Forms.Button btnMinus;
     }
 }
 

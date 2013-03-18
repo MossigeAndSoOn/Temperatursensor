@@ -16,6 +16,8 @@ namespace MainForm
         private NotifyIcon m_notifyicon = new NotifyIcon();
         private ContextMenu m_menu = new ContextMenu();        
         int dataPointsInChart = 15;
+        int yAxisMin = -20;
+        int yAxisMax = 40;
         public MainForm()
         {
             InitializeComponent();
@@ -32,7 +34,7 @@ namespace MainForm
                 // remove unnessesary legend on top right of chart
                 this.chart1.Legends.RemoveAt(0);
                 // start timer 
-                MainTimer.Interval = 1000 * Properties.Settings.Default.sensorReadInterval;
+                MainTimer.Interval = 5000 * Properties.Settings.Default.sensorReadInterval;
                 MainTimer.Enabled = true;
                 // disallow resizing
                 this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -150,8 +152,8 @@ namespace MainForm
 //------------------------Chart-------------------------------------------
         private void populateChart(int numPoints) // populates Chart1 with the last temperature readings from the MDB
         {
-            //try
-            //{
+            try
+            {
                 // remove the default values
                 this.chart1.Series.Clear();
                 Series series1 = this.chart1.Series.Add("Temperature");
@@ -160,6 +162,9 @@ namespace MainForm
                 // add axis labels
                 chart1.ChartAreas[0].AxisY.Title = "Temperature (celsius)";
                 chart1.ChartAreas[0].AxisX.Title = "Readings";
+                chart1.ChartAreas[0].AxisY.Minimum = yAxisMin;
+                chart1.ChartAreas[0].AxisY.Maximum = yAxisMax;
+                
                 // change marker thickness
                 series1.BorderWidth = 5;
                 // add data points to the chart
@@ -174,11 +179,11 @@ namespace MainForm
                 Font headingFont = new Font(FontFamily.GenericSansSerif, 14);
                 this.chart1.Titles.Clear();
                 this.chart1.Titles.Add("Last " + numPoints + " readings:").Font = headingFont;
-            //}
-            //catch (Exception ex)
-            //{
-            //    Error.WriteLog("Main form", ex.Message, "chart");
-            //}
+            }
+            catch (Exception ex)
+            {
+                Error.WriteLog("Main form", ex.Message, "chart");
+            }
         }
 
         private void btnMoreData_Click(object sender, EventArgs e)
@@ -301,6 +306,37 @@ namespace MainForm
         {
             MDB_readerClass.Contacts_list_form contacts = new MDB_readerClass.Contacts_list_form();
             contacts.ShowDialog();
+        }
+
+        private void btnUp_Click(object sender, EventArgs e)
+        {
+            yAxisMax += 10;
+            yAxisMin += 10;
+                
+        }
+
+        private void btnDown_Click(object sender, EventArgs e)
+        {
+            yAxisMax -= 10;
+            yAxisMin -= 10;
+        }
+
+        private void btnPlus_Click(object sender, EventArgs e)
+        {
+            if ((yAxisMax - yAxisMin) > 10)
+            {
+                yAxisMax -= 5;
+                yAxisMin += 5;
+            }
+        }
+
+        private void btnMinus_Click(object sender, EventArgs e)
+        {
+            if ((yAxisMax - yAxisMin) < 200)
+            {
+                yAxisMax += 5;
+                yAxisMin -= 5;
+            }
         }
     }
 }
