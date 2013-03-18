@@ -63,6 +63,7 @@
             this.btnDown = new System.Windows.Forms.Button();
             this.btnPlus = new System.Windows.Forms.Button();
             this.btnMinus = new System.Windows.Forms.Button();
+            this.chkWarnError = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.grBoxSettings.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -127,13 +128,14 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.chkWarnError);
             this.groupBox3.Controls.Add(this.txtMin);
             this.groupBox3.Controls.Add(this.txtMax);
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Location = new System.Drawing.Point(176, 19);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(180, 76);
+            this.groupBox3.Size = new System.Drawing.Size(235, 76);
             this.groupBox3.TabIndex = 13;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Temperature limits:";
@@ -360,6 +362,17 @@
             this.btnMinus.UseVisualStyleBackColor = true;
             this.btnMinus.Click += new System.EventHandler(this.btnMinus_Click);
             // 
+            // chkWarnError
+            // 
+            this.chkWarnError.AutoSize = true;
+            this.chkWarnError.Location = new System.Drawing.Point(146, 18);
+            this.chkWarnError.Name = "chkWarnError";
+            this.chkWarnError.Size = new System.Drawing.Size(74, 17);
+            this.chkWarnError.TabIndex = 14;
+            this.chkWarnError.Text = "WarnError";
+            this.chkWarnError.UseVisualStyleBackColor = true;
+            this.chkWarnError.CheckedChanged += new System.EventHandler(this.chkWarnError_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -431,6 +444,7 @@
         private System.Windows.Forms.Button btnDown;
         private System.Windows.Forms.Button btnPlus;
         private System.Windows.Forms.Button btnMinus;
+        private System.Windows.Forms.CheckBox chkWarnError;
     }
 }
 

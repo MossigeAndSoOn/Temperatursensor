@@ -68,6 +68,8 @@ namespace MainForm
                         writer.Write("{0} {1} {2} {4}", timestring, errorMsg, comment, origin);
                     }
                 }
+                // Sende varsel om at feil har oppstått
+                ClientFeedback.errorWarning(origin, errorMsg, comment);
             }
             catch (Exception)
             {

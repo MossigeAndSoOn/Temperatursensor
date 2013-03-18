@@ -18,6 +18,7 @@ namespace MainForm
         int dataPointsInChart = 15;
         int yAxisMin = -20;
         int yAxisMax = 40;
+        public static bool warnError = false;
         public MainForm()
         {
             InitializeComponent();
@@ -109,13 +110,6 @@ namespace MainForm
         {
             try
             {
-                //if (e.CloseReason = CloseReason.WindowsShutDown)
-                //{
-                //    MessageBox.Show("Noooo, dont go!");
-                //}
-                //if(
-                //e.Cancel = true;
-                //Hide();
                 m_notifyicon.Dispose();
             }
             catch (Exception ex)
@@ -164,6 +158,7 @@ namespace MainForm
                 chart1.ChartAreas[0].AxisX.Title = "Readings";
                 chart1.ChartAreas[0].AxisY.Minimum = yAxisMin;
                 chart1.ChartAreas[0].AxisY.Maximum = yAxisMax;
+                chart1.ChartAreas[0].AxisX.Interval = 5;
                 
                 // change marker thickness
                 series1.BorderWidth = 5;
@@ -336,6 +331,18 @@ namespace MainForm
             {
                 yAxisMax += 5;
                 yAxisMin -= 5;
+            }
+        }
+
+        private void chkWarnError_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkWarnError.Checked == true)
+            {
+                warnError = true;
+            }
+            if (chkWarnError.Checked != true)
+            {
+                warnError = false;
             }
         }
     }

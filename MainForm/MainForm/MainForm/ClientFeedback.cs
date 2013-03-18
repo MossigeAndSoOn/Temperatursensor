@@ -9,6 +9,25 @@ namespace MainForm
     {
         private static bool warningHasBeenSendt = false;
 
+        public static void errorWarning(string origin, string errorMsg, string comment)
+        {
+            try
+            {
+                if (MainForm.warnError == true)
+                {
+                    SMS.sendSMSToEntireContactsList("Error", "Origin: " + origin + "\nErrorMessage: " + errorMsg +
+                        "\nComment to error: " + comment);
+                    Mail.sendMailToEntireContactsList("Error", "Origin: " + origin + "\nErrorMessage: " + errorMsg +
+                        "\nComment to error: " + comment);
+                }
+            }
+            catch (Exception)
+            {
+                // kan ikke rapportere om error her, ettersom det bare vil komme tilbake igjen hit
+                // som en rapport, og dermed gi en uendelig feedback-loop
+            }
+        }
+
         public static void determineNeedForWarning(decimal sensorValue)
         {
             try
