@@ -307,13 +307,14 @@ namespace MainForm
         {
             yAxisMax += 10;
             yAxisMin += 10;
-                
+            populateChart(dataPointsInChart);
         }
 
         private void btnDown_Click(object sender, EventArgs e)
         {
             yAxisMax -= 10;
             yAxisMin -= 10;
+            populateChart(dataPointsInChart);
         }
 
         private void btnPlus_Click(object sender, EventArgs e)
@@ -322,6 +323,7 @@ namespace MainForm
             {
                 yAxisMax -= 5;
                 yAxisMin += 5;
+                populateChart(dataPointsInChart);
             }
         }
 
@@ -331,6 +333,7 @@ namespace MainForm
             {
                 yAxisMax += 5;
                 yAxisMin -= 5;
+                populateChart(dataPointsInChart);
             }
         }
 
@@ -344,6 +347,10 @@ namespace MainForm
             {
                 warnError = false;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
         }
     }
 }
