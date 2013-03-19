@@ -29,15 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.btnMoreData = new System.Windows.Forms.Button();
             this.btnLessData = new System.Windows.Forms.Button();
             this.grBoxSettings = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.chkWarnError = new System.Windows.Forms.CheckBox();
             this.txtMin = new System.Windows.Forms.TextBox();
             this.txtMax = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -63,7 +64,6 @@
             this.btnDown = new System.Windows.Forms.Button();
             this.btnPlus = new System.Windows.Forms.Button();
             this.btnMinus = new System.Windows.Forms.Button();
-            this.chkWarnError = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.grBoxSettings.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -76,16 +76,16 @@
             // 
             this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea4.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chart1.Legends.Add(legend4);
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(13, 13);
             this.chart1.Name = "chart1";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.chart1.Series.Add(series4);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(444, 205);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
@@ -139,6 +139,17 @@
             this.groupBox3.TabIndex = 13;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Temperature limits:";
+            // 
+            // chkWarnError
+            // 
+            this.chkWarnError.AutoSize = true;
+            this.chkWarnError.Location = new System.Drawing.Point(146, 18);
+            this.chkWarnError.Name = "chkWarnError";
+            this.chkWarnError.Size = new System.Drawing.Size(74, 17);
+            this.chkWarnError.TabIndex = 14;
+            this.chkWarnError.Text = "WarnError";
+            this.chkWarnError.UseVisualStyleBackColor = true;
+            this.chkWarnError.CheckedChanged += new System.EventHandler(this.chkWarnError_CheckedChanged);
             // 
             // txtMin
             // 
@@ -273,6 +284,7 @@
             this.pictureBox1.Size = new System.Drawing.Size(100, 98);
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // txtLowest
             // 
@@ -361,17 +373,6 @@
             this.btnMinus.Text = "-";
             this.btnMinus.UseVisualStyleBackColor = true;
             this.btnMinus.Click += new System.EventHandler(this.btnMinus_Click);
-            // 
-            // chkWarnError
-            // 
-            this.chkWarnError.AutoSize = true;
-            this.chkWarnError.Location = new System.Drawing.Point(146, 18);
-            this.chkWarnError.Name = "chkWarnError";
-            this.chkWarnError.Size = new System.Drawing.Size(74, 17);
-            this.chkWarnError.TabIndex = 14;
-            this.chkWarnError.Text = "WarnError";
-            this.chkWarnError.UseVisualStyleBackColor = true;
-            this.chkWarnError.CheckedChanged += new System.EventHandler(this.chkWarnError_CheckedChanged);
             // 
             // MainForm
             // 

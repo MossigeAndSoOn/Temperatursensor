@@ -349,8 +349,14 @@ namespace MainForm
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
+            // vis relevant info om utropstegnet, f.eks hvilken error gul utropstegn varsler om
+            if (Error.HasError == true)
+            {
+                MessageBox.Show(Database.getLastErrorMessage(), "Last reported error was:");
+            }
+            
         }
     }
 }

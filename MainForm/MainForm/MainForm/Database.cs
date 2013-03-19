@@ -185,6 +185,31 @@ namespace MainForm
                 return errorTable;
             }
         }
+        public static string getLastErrorMessage()
+        {
+            string message = "";
+            string lSQL = "SELECT TOP 1 * " +
+                "FROM ErrorLog " +
+                "Order By ID DESC";
+            try
+            {
+                DataTable messages = passSQLstringToMDB(lSQL);
+                foreach (DataRow row in messages.Rows)
+                {
+                    message += row["ErrorMsg"].ToString();
+                }
+                return message;
+            }
+            catch (Exception ex)
+            {
+                // if an exception is thrown, a empty table is returned, with one column named "Error"
+                Error.WriteLog("Database", ex.Message, "generate plot points");
+                DataTable errorTable = new DataTable();
+                errorTable.Columns.Add("Error!", typeof(string));
+                return "Could not get any info on the error, sorry";
+            }
+        }
+        
 
 
 
