@@ -355,8 +355,14 @@ namespace MainForm
             if (Error.HasError == true)
             {
                 MessageBox.Show(Database.getLastErrorMessage(), "Last reported error was:");
+                Error.HasError = false;
             }
-            
+            else
+            {
+                MessageBox.Show("Green - Temperature within limits" + 
+                "\nBlue - Temperature too low\nRed - Temperature too high\nYellow - Error detected"
+                ,"Exclamation marks explained:");
+            }
         }
     }
 }
